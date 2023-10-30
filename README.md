@@ -109,9 +109,10 @@ Origins for Rotorflight:
  - **Petri Mattila** (Dr.Rudder) - author, maintainer
  - **pkaig** - wiki, resource mapping, testing
  - **egon** - wiki, Dutch translation, Lua Scripts, testing
+ - **Jiawen Bao** (etocii) - algorithm development, testing
+ - **mattis** - German translation, testing
  - **mopatop** - wiki, testing
  - **Mike_PSL** - wiki, testing
- - **mattis** - German translation, testing
  - **Simon Stummer** (simonsummer) - testing
 
 Origins for Heliflight-3D:
