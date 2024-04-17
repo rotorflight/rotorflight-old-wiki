@@ -3,55 +3,64 @@
 
 ***
 
-Rotorflight is a Flight Control/FBL Software Suite for traditional single-rotor RC helicopters.
+[Rotorflight](https://github.com/rotorflight) is a Flight Control software suite designed for
+single-rotor helicopters. It consists of:
 
-It is based on Betaflight 4.2, enjoying all the great features of the Betaflight platform, plus many new features added for helicopters. Rotorflight borrows ideas and code also from Heliflight3D, an earlier fork of Betaflight for helicopters.
+- Rotorflight Flight Controller Firmware
+- Rotorflight Configurator, for flashing and configuring the flight controller
+- Rotorflight Blackbox Explorer, for analyzing blackbox flight logs
+- Rotorflight LUA Scripts, for configuring the flight controller using a transmitter
 
-Rotorflight does **NOT** support multi-rotor crafts, nor airplanes; it is only for traditinal RC helicopters, including co-axial and tandem helicopters.
-
-
-## NEWS
-
-The **Rotorflight v1.0.2** is now available!
-
-Please download the latest version here:
-
-- The Configurator is available for download [here](https://github.com/rotorflight/rotorflight-configurator/releases/tag/release/1.0.2).
-- The Blackbox is available for download [here](https://github.com/rotorflight/rotorflight-blackbox/releases/tag/release/1.0.1).
-- The Transmitter LUA scripts are available for download [here](https://github.com/rotorflight/rotorflight-lua-scripts/releases/tag/release/1.0.1).
-
-and follow the instructions in the [Wiki](https://github.com/rotorflight/rotorflight/wiki/Installing-Rotorflight-Firmware).
+Built on Betaflight 4.3, Rotorflight incorporates numerous advanced features specifically
+tailored for helicopters. It's important to note that Rotorflight does _not_ support multi-rotor
+crafts or airplanes; it's exclusively designed for RC helicopters.
 
 
-## Information
+## Downloads
 
-For latest information, please see [Rotorflight Wiki](https://github.com/rotorflight/rotorflight/wiki)
+Please download the latest version from here:
+
+- [Rotorflight Configurator](https://github.com/rotorflight/rotorflight-configurator/releases/)
+- [Rotorflight Blackbox](https://github.com/rotorflight/rotorflight-blackbox/releases/)
+- [LUA Scripts for EdgeTx and OpenTx](https://github.com/rotorflight/rotorflight-lua-scripts/releases/)
+- [LUA Scripts for FrSky Ethos](https://github.com/rotorflight/rotorflight-lua-ethos/releases/)
+
+
+## Installation
+
+Instructions, guides, tutorials, documentation can be found on the [Rotorflight website](https://www.rotorflight.org/).
 
 
 ## Features
 
 Rotorflight has many features:
 
-* Great GUI application for setting up and configuration
-* Advanced PID control, tuned for helicopters
-* Main rotor speed governor
-* Precompensation between collective/cyclic/yaw
-* Advanced gyro filtering for helicopters
-  - Dynamic RPM based notch filter banks
-  - Advanced dynamic LPF
+* Many receiver protocols: CRSF, S.BUS, F.Port, DSM, IBUS, XBUS, EXBUS, GHOST, CPPM
+* Support for various telemetry protocols: CSRF, S.Port, HoTT, etc.
+* ESC telemetry protocols: BLHeli32, Hobbywing, Scorpion, Kontronik, OMP Hobby, ZTW, APD, YGE
+* Advanced PID control tuned for helicopters
+* Stabilisation modes (6D)
+* Rotor speed governor
+* Motorised tail support with Tail Torque Assist (TTA, also known as TALY)
+* Remote configuration and tuning with the transmitter
+  - With knobs / switches assigned to functions
+  - With LUA scripts on EdgeTX, OpenTX and Ethos
+* Extra servo/motor outputs for AUX functions
 * Fully customisable servo/motor mixer
-* Flexible servo configuration
-* Flight Profiles (Banks)
-* In-flight settings adjustment from RC channels
+* Sensors for battery voltage, current, BEC, etc.
+* Advanced gyro filtering
+  - Dynamic RPM based notch filters
+  - Dynamic notch filters based on FFT
+  - Dynamic LPF
+* High-speed Blackbox logging
 
 Plus lots of features inherited from Betaflight:
 
-* Blackbox Flight logger
-* Multiple ESC protocols: DShot, Multishot, Oneshot, and traditional PWM
-* Multiple RX telemetry protocols: CSRF, FrSky, HoTT, MSP, etc.
-* Telemetry inputs for RSSI, battery voltage, current sensors, etc.
-* Multi-color RGB LEDs
+* Configuration profiles for changing various tuning parameters
+* Rates profiles for changing the stick feel and agility
+* Multiple ESC protocols: PWM, DSHOT, Multishot, etc.
 * Configurable buzzer sounds
+* Multi-color RGB LEDs
 * GPS support
 
 And many more...
@@ -59,65 +68,54 @@ And many more...
 
 ## Hardware support
 
-Generally speaking, Rotorflight supports all flight controller hardware that is supported by Betaflight.
-With a caveat that the flight controller must have enough suitable I/O pins for connecting all the servos
-and motors required by a collective pitch helicopter.
+The best hardware for Rotorflight is any Flight Controller especially designed for it.
+See [What board is suitable?](https://www.rotorflight.org/docs/Tutorial-Quickstart/What-Board)
 
-Also, the FC boards are typically labeled for multi-rotor use - thus the user needs to understand how these
-functions can be used for a different purpose with helicopters. Usually this is just about using some
-of the motor outputs for servos, but in some cases a more advanced remapping may be needed.
+Otherwise, Rotorflight supports all flight controller boards that are supported by Betaflight 4.3,
+assuming that the board has enough suitable I/O pins for connecting all the servos and motors required.
 
-It is recommended to use a STM32F7 or STM32F4 based flight controller, as Rotorflight greatly benefits from
-the latest filtering algorithms and other new features that are all CPU intensive. The faster F405 is a better 
-option than the older and slower F411, but both can be made to work.
+Also, the Betaflight boards are labeled for multi-rotor use - thus the user needs to understand how
+these functions can be used for a different purpose with helicopters. Usually this is just about using
+the motor outputs for servos, but in some cases a more advanced remapping may be needed.
 
-The old F3 flight controllers are not supported.
+Rotorflight supports STM32G4, STM32F4, STM32F7 and STM32H7 MCUs from ST.
 
+It's highly recommended to use an STM32F7 based flight controller for Rotorflight.
+It's the way to go since it can take full advantage of the latest control and filtering
+algorithms, plus other cool features that really put the CPU to work.
 
-## Installation
-
-Please see the [Wiki](https://github.com/rotorflight/rotorflight/wiki) for instructions.
-
-For downloading the latest version, please see [Releases](https://github.com/rotorflight/rotorflight/wiki/Releases).
+An absolute minimum is an STM32G4 based board, but it probably won't be able to run all
+the new features later on. The older STM32F411 should be avoided if possible.
 
 
 ## Contributing
 
-Contributions are welcome and encouraged. You can contribute in many ways:
+Rotorflight is an open-source community project. Anybody can join in and help to make it better by:
 
- - testing Rotorflight with different types of helicopters
- - improving the documentation in the Wiki
- - writing How-To guides
- - provide a new translation for the configurator
- - implement new features or fix bugs
- - reporting bugs
- - new ideas & suggestions
- - helping other users
+* helping other users on Rotorflight Discord or other online forums
+* [reporting](https://github.com/rotorflight?tab=repositories) bugs and issues, and suggesting improvements
+* testing new software versions, new features and fixes; and providing feedback
+* participating in discussions on new features
+* create or update content on the [Website](https://www.rotorflight.org)
+* [contributing](https://www.rotorflight.org/docs/Contributing/intro) to the software development - fixing bugs, implementing new features and improvements
+* [translating](https://www.rotorflight.org/docs/Contributing/intro#translations) Rotorflight Configurator into a new language, or helping to maintain an existing translation
 
-Please see [Wiki](https://github.com/rotorflight/rotorflight/wiki/Contributing) for details.
 
-## Credits
+## Origins
 
-Rotorflight is Free Software. Meaning, it is available free of charge _without warranty_, the source code is available, and it is supported by the users themselves as a community. Rotorflight is under the GPLv3 license.
+Rotorflight is software that is **open source** and is available free of charge without warranty.
 
-Rotorflight is forked from Betaflight, which in turn is forked from Cleanflight.
-Rotorflight borrows ideas and code also from Heliflight-3D, another Betaflight fork for helis.
+Rotorflight is forked from [Betaflight](https://github.com/betaflight), which in turn is forked from [Cleanflight](https://github.com/cleanflight).
+Rotorflight borrows ideas and code also from [HeliFlight3D](https://github.com/heliflight3d/), another Betaflight fork for helicopters.
 
-So thanks goes to all those whom have contributed along the way.
+Big thanks to everyone who has contributed along the journey!
 
-Origins for Rotorflight:
- - **Petri Mattila** (Dr.Rudder) - author, maintainer
- - **pkaig** - wiki, resource mapping, testing
- - **egon** - wiki, Dutch translation, Lua Scripts, testing
- - **Jiawen Bao** (etocii) - algorithm development, testing
- - **mattis** - German translation, testing
- - **mopatop** - wiki, testing
- - **Mike_PSL** - wiki, testing
- - **Simon Stummer** (simonsummer) - testing
 
-Origins for Heliflight-3D:
- - **James-T1** (author)
- - **Dr.Rudder**
- - **Westie**
+## Donate
 
-And many many others who haven't been mentioned....
+If you find Rotorflight useful, please consider [supporting the development by donating](https://www.paypal.com/donate/?hosted_button_id=LLP4MT8C8TPVJ) to the Rotorflight Project.
+
+
+## Contact
+
+Team Rotorflight can be contacted by email at rotorflightfc@gmail.com.
